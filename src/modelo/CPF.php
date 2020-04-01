@@ -1,27 +1,29 @@
 <?php
 
+namespace Alura\Banco\Modelo;
+
     class CPF
     {
         private static int $codigo=0;
-        private string $numero;
+        private string $cpf;
 
-        public function __construct(string $numero)
+        public function __construct(string $cpf)
         {
-            $numero = filter_var($numero, FILTER_VALIDATE_REGEXP, [
+            $cpf = filter_var($cpf, FILTER_VALIDATE_REGEXP, [
                 'options' => [
                     'regexp' => '/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}$/'
                 ]
             ]);
 
-            if ($numero === false) {
+            if ($cpf === false) {
                 echo "Cpf inválido";
                 exit();
             }
-            $this->numero = $numero;
+            $this->cpf = $cpf;
             self::$codigo++;
         }
-        public function recuperaNumero(): string
+        public function getCPF(): string
         {
-            return $this->numero;
+            return $this->cpf;
         }
     }
